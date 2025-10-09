@@ -11,7 +11,10 @@ int main()
     /* get user input */
     scanf("%50s", buffer );
 
-   if(!access(fn, W_OK)){ 
+    seteuid(getuid());
+
+   if(!access(fn, W_OK)){
+      // sleep(10);
        fp = fopen(fn, "a+"); 
        fwrite("\n", sizeof(char), 1, fp);
        fwrite(buffer, sizeof(char), strlen(buffer), fp);
